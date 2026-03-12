@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2026 Open Source Integrators
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <!-- Opportunity form: make Expected Closing conditionally required -->
+    <record id="crm_case_form_view_oppor_inherit_require_date"
+            model="ir.ui.view">
+        <field name="name">crm.lead.oppor.form.require.expected.date</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_deadline']" position="before">
+                <field name="stage_require_expected_date" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='date_deadline']" position="attributes">
+                <attribute name="attrs">
+                    {'required': [('stage_require_expected_date', '=', True)]}
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
